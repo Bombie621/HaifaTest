@@ -4,77 +4,55 @@
 <body>
     <div id="myDIV" class="header">
         <h2>My To Do List</h2>
-        <input type="text" id="myInput" placeholder="Title...">
-        <button onclick="newElement()" class="addBtn">Add</button>
-        <button onclick="removeItem()">Remove</button>
+        
+        <input type="text" id="myInput" placeholder="Add a chore to todo list">
+        <button onclick="addToDo()" class="addBtn">Add</button>
+        <button onclick="removeToDO()">Remove</button>
+        <button onclick="search()">search</button>
+        <button onclick="showAll()">show all</button>
       </div>
       
-      <ul id="myUL">
-        <li>Hit the gym</li>
-        <li class="checked">Pay bills</li>
-        <li>Meet George</li>
-        <li>Buy eggs</li>
-        <li>Read a book</li>
-        <li>Organize office</li>
-      </ul>
+      <span></span>
+      
     <script>
      
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
+        let toDoList = [{"id": 1, "priority": "low", "title": "biluiim"},
+                        {"id": 2, "priority": "high", "title": "Gym"},
+                        {"id": 3, "priority": "low", "title": "lenakotBait"},
+                        {"id": 4, "priority": "high", "title": "learnJavaScript"}]
+        //document.querySelector('span').innerHTML += toDoList[1].title
+        function addToDo(text){
+            // toDoList.push()
+            var li = document.createElement("li");
+            var inputValue = document.getElementById("myInput").value;
+            var t = document.createTextNode(inputValue);
+            li.appendChild(t);
+            if (inputValue === '') {
+            alert("You must write something!");
+            } else {
+                document.querySelector('span').appendChild(li);
+                }
+            document.getElementById("myInput").value = "";
+            
+        }
+        
+        function removeToDO(){
+            toDoList.splice(toDoList.length -1)
+            console.log(toDoList)
+        }
 
+        function search(){
+            for(let key in toDoList){
+            }
+        }
+    
 
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-}
-
-
-var list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false);
-
-
-function newElement() {
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("myUL").appendChild(li);
-  }
-  document.getElementById("myInput").value = "";
-
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
-  }
-}
-
-
+        function showAll(){
+            let li = document.createElement('li')
+            document.querySelector('span').innerHTML += toDoList[0].title + ' ' +
+                 toDoList[1].title + ' ' + toDoList[2].title + ' ' + toDoList[3].title
+            
+        }
     </script>
 </body>
 </html>
